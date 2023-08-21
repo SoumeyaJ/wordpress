@@ -1,16 +1,15 @@
 <?php
 
 class DisclaimerOptions{
-    private $id_disclaimer;
-    private $message_disclaimer;
-    private $redirection_ko;
+    private $id_disclaimer; // identifiant du disclaimer.
+    private $message_disclaimer; // contenu du message à afficher dans le disclaimer.
+    private $redirection_ko; // l'url de redirection en cas de réponse négative par le visiteur.
 
     function __construct($id_disclaimer = "Nc", $message_disclaimer = "Nc", $redirection_ko = "Nc") {
         $this->id_disclaimer = $id_disclaimer;
         $this->message_disclaimer = $message_disclaimer;
         $this->redirection_ko = $redirection_ko;
     }
-
 
     /**
      * Get the value of id_disclaimer

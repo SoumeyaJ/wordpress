@@ -1,5 +1,5 @@
 <?php
-// définition du chemin d'accés à la class DisclamerOptions
+// définition du chemin d'accés à la classe DisclamerOptions
 define('MY_PLUGIN_PATH', plugin_dir_path(__FILE__));
 include(MY_PLUGIN_PATH . '../Entity/DisclaimerOptions.php');
 
@@ -8,7 +8,7 @@ class DisclaimerGestionTable
 
     public function creerTable()
     {
-        // instanciation de la classe DisclaimerOptions
+        // instanciation de la classe DisclaimerOptions et créatin de l'objet message
         $message = new DisclaimerOptions();
 
         // on alimente l'objet message avec les valeurs par défaut grâce au setter (mutateur)
@@ -30,7 +30,7 @@ class DisclaimerGestionTable
             if (!$wpdb->query($sql)) {
                 die("Une erreur est survenue, contactez le développeur du plugin...");
             }
-            // Insertion du message par défaut
+            // Insertion du message par défaut et utilisation des valeurs.
             $wpdb->insert(
                 $wpdb->prefix . 'disclaimer_options',
                 array(
@@ -51,17 +51,18 @@ class DisclaimerGestionTable
         $wpdb->query($sql);
     }
 
-
+    // mettre à jour les données saisies dans le formulaire.
     static function insererDansTable(DisclaimerOptions $option)
     {
+        // ajouter un message de confirmation lors de l'insertion des valeurs du formulaire après l'insertion en bdd
+        // fournir un message de confirmation ou d'erreur.
         $message_inserer_valeur = '';
         global $wpdb;
         try {
             $table_disclaimer = $wpdb->prefix.'disclaimer_options';
                       $sql = $wpdb->prepare(
                         "UPDATE $table_disclaimer SET message_disclaimer ='%s', redirection_ko = '%s'
-                        WHERE id_disclaimer = '%s",$option->getMessageDisclaimer(),$option->getRedirectionko(),1
-                      );
+                        WHERE id_disclaimer = '%s'",$option->getMessageDisclaimer(),$option->getRedirectionko(),1);
             $wpdb->query($sql);
             return $message_inserer_valeur = '<span style="color:green; font-size:16px;">Les données ont correctement été mises à jour !</span>';
         }

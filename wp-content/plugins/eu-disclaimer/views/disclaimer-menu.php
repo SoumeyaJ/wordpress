@@ -1,5 +1,7 @@
 
 <?php
+
+// vérifier que le formulaire n'est pas vide avant la validation pour éviter de transmettre des données vides
 if (!empty($_POST['message_disclaimer']) && !empty($_POST['url_redirection'])) {
     $text = new DisclaimerOptions();
     $text->setMessageDisclaimer(htmlspecialchars($_POST['message_disclaimer']));
@@ -15,6 +17,7 @@ if (!empty($_POST['message_disclaimer']) && !empty($_POST['url_redirection'])) {
 <form method="post" action="" novalidate="novalidate">
     <table class="form-table">
         <tr>
+            <!-- afficher le message de confirmation por les modifications des valeurs saisies dans le formulaire. -->
             <p> <?php if (isset($message)) echo $message; ?></p>
             <th scope="row">
                 <label for="message_disclaimer">Message du disclaimer</label>
@@ -47,6 +50,7 @@ if (!empty($_POST['message_disclaimer']) && !empty($_POST['url_redirection'])) {
 </h3>
 <img src="<?php echo plugin_dir_url(dirname(__FILE__)) . 'assets/img/afpa.png'; ?>" width="10%" />
 
+<!-- message destiné au client pour lui expliquer comment tiliser le "shortcode" -->
 <p>Comment afficher le plugin ?<br>
     Ajoutezz ce code php sous a balise body html <br>
     echo do_shortcode('[eu-disclaimer]') dans le fichier themes/oceanwp/templates/landing.php <br>

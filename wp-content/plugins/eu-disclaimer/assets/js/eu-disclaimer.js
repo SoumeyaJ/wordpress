@@ -12,14 +12,17 @@ jQuery(document).ready(function ($) {
     }
       
 })
+// pour afficher le modal
+
 // $("#monModal").modal({
 //     escapeClose: false,
 //     clickClose: false,
 //     showClose: false
 // });
 
+
+// crétion du cookie.
 function creerUnCookie(nomCookie, valeurCookie,dureeJours) {
-    // console.log("Ecire Cookie : " + nomCookie);
     // Si le nombre de jour est spécifié
     if (dureeJours) {
         var date = new Date();
@@ -33,15 +36,14 @@ function creerUnCookie(nomCookie, valeurCookie,dureeJours) {
     document.cookie = nomCookie + "=" + valeurCookie + expire + ";path=/";
 }
 
+// lecture du cookie
 function lireUnCookie(nomCookie) {
-    console.log("Lire Cookie : " + nomCookie);
     // Ajoute le signe égale virgule au nom pour la recherche dans le tableau contenant tous les 
     // cookies
     var nomFormate = nomCookie + "=";
     // Tableau contenant tous les cookies
     var tableauCookies = document.cookie.split(";");
-    // console.log("Les cookies : ");
-    // console.log(tableauCookies);
+   
     for (let i = 0; i < tableauCookies.length; i++) {
         var cookieTrouve = tableauCookies[i];
         // Tant que l'on trouve un espace on le supprime
@@ -51,11 +53,9 @@ function lireUnCookie(nomCookie) {
         if (cookieTrouve.indexOf(nomFormate) == 0) {
             return cookieTrouve.substring(nomFormate.length, cookieTrouve.length);
         }
-
     }
     // On retourne une valeur null dans le cas au aucun cookie n'est trouvé
-    return null;
-    
+    return null; 
 }
 
 document.getElementById("actionDisclaimer").addEventListener("click", accepterLeDisclaimer);
